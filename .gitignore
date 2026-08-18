@@ -6,8 +6,6 @@ env/
 .ipynb_checkpoints/
 data/raw/*
 data/processed/*
-models/*
-!models/.gitkeep
 reports/figures/*
 reports/results/*
 .DS_Store
