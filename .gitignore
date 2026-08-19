@@ -12,3 +12,4 @@ reports/results/*
 .DS_Store
 .vscode/
 .env
+.claude/
