@@ -37,6 +37,20 @@ def load_threshold():
     return _threshold
 
 
+def validate_customer_data(customer_data):
+    """Rejects clearly impossible values before they reach the pipeline.
+
+    A model will still return a number for nonsense input (e.g. age = -5) -
+    that number isn't meaningful, so it's rejected here instead.
+    """
+    if "age" in customer_data.columns and (customer_data["age"] <= 0).any():
+        raise ValueError("age must be greater than 0")
+    if "campaign" in customer_data.columns and (customer_data["campaign"] < 1).any():
+        raise ValueError("campaign must be >= 1 (it counts this planned call too)")
+    if "previous" in customer_data.columns and (customer_data["previous"] < 0).any():
+        raise ValueError("previous must be >= 0")
+
+
 def predict_probability(customer_data):
     """customer_data: a DataFrame of one or more raw customer records.
 
@@ -44,6 +58,7 @@ def predict_probability(customer_data):
     (age, job, campaign, education, ... ) - never `y`, never `duration`.
     Returns the predicted probability of subscribing for each row.
     """
+    validate_customer_data(customer_data)
     pipeline = load_pipeline()
     return pipeline.predict_proba(customer_data)[:, 1]
 

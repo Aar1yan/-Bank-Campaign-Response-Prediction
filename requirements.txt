@@ -8,3 +8,4 @@ xgboost
 shap
 joblib
 streamlit
+pytest
