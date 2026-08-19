@@ -1,0 +1,21 @@
+# Local environment - the image installs its own dependencies
+.venv/
+venv/
+env/
+
+# Caches and dev artifacts
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.DS_Store
+.git/
+.vscode/
+
+# Not needed to run the app - the trained model/threshold are already
+# in models/, so raw/processed data, notebooks, and tests aren't required
+data/
+notebooks/
+reports/
+tests/
+README.md
